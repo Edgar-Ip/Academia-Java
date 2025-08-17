@@ -1,14 +1,10 @@
 package com.project.Project_SpringBatch.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
-import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import java.util.List;
 
 /**
  * Configuración de OpenAPI/Swagger para documentación de la API
@@ -27,9 +23,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(createApiInfo())
-                .servers(createServersList());
-    }
+                .info(createApiInfo());    }
 
     /**
      * Crea la información básica de la API
@@ -67,46 +61,9 @@ public class SwaggerConfig {
                     - Los jobs se ejecutan de forma asíncrona
                     - Se mantiene un registro completo de todas las ejecuciones
                     - Los datos se procesan en chunks para optimizar el rendimiento
-                    """)
-                .version("1.0.0")
-                .contact(createContactInfo())
-                .license(createLicenseInfo());
+                    """);
+            
     }
 
-    /**
-     * Crea la información de contacto
-     * @return objeto Contact con información del equipo de desarrollo
-     */
-    private Contact createContactInfo() {
-        return new Contact()
-                .name("Development Team")
-                .email("dev-team@example.com")
-                .url("https://github.com/example/customer-migration");
-    }
-
-    /**
-     * Crea la información de licencia
-     * @return objeto License con información de la licencia
-     */
-    private License createLicenseInfo() {
-        return new License()
-                .name("MIT License")
-                .url("https://opensource.org/licenses/MIT");
-    }
-
-    /**
-     * Crea la lista de servidores disponibles
-     * @return lista de servidores configurados
-     */
-    private List<Server> createServersList() {
-        Server localServer = new Server()
-                .url("http://localhost:" + serverPort)
-                .description("Servidor de desarrollo local");
-
-        Server productionServer = new Server()
-                .url("https://api.example.com")
-                .description("Servidor de producción");
-
-        return List.of(localServer, productionServer);
-    }
 }
+
